@@ -21,6 +21,8 @@ let coinX = -5
 let coinY = 200
 let rockHeight = 70
 let rockWidth = 70
+let coinHeight = 70
+let coinWidth = 70
 let startBtn = document.querySelector('#start')
     
 
@@ -34,7 +36,13 @@ document.addEventListener ('keydown', (event) =>{
         isRightArrow = false;
         isLeftArrow = true;
     }
-}) 
+})
+
+document.addEventListener('keyup', ()=>{
+    isRightArrow = false;
+    isLeftArrow = false;
+})
+
 
 //CREATE IMAGES
 let backImg = document.createElement('img')
@@ -62,8 +70,9 @@ function draw () {
     moveRocks() 
     movePlayer()
     dropCoins()
-    rockCollision()
-    startGame()
+    
+    
+    
 
 }
 
@@ -79,6 +88,8 @@ function moveRocks (){
              rockPositionY[i] = -5 
              rockPositionX[i] = Math.floor(Math.random() * 1000)
          }
+
+         rockCollision()             
      
         }
 }
@@ -101,33 +112,39 @@ function dropCoins(){
     }
 }
 
-function rockCollision(){
-    if(manX + manWidth <= rockWidth){
-        gameOver()
+/*function rockCollision(){
+    if(){
+       gameOver()
+        //console.log('game over')
     }
 }
 
 function coinCollision() {
-    if(manX + manWidth <= coinWidth) {
+    if() {
         score++
     }
 
-}
+}*/
 
 function gameOver(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
     startBtn.style.display = 'block'
-    clearInterval(intervalID) //don'twe need this?
+    clearInterval(intervalID) 
     alert('GameOver')
 
 }
 
+
+
 function startGame(){
+    
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
+
     intervalID = setInterval(()=> {
         requestAnimationFrame(draw)
-    },30)
+    }, 30)
+   
 }
 
 window.addEventListener('load', () => {
