@@ -6,7 +6,11 @@ Beer Challenge is a game where the player has to move to the left and the right 
 While the player is trying to get the coins, the obstacles will keep dropping so it will make the player a little more difficult to complete the task.
 
 ## MVP (DOM - CANVAS)
-- obstalcles
+The game has this elements:
+- The player 
+- Obstacles (in this case are rocks falling from outside the canvas)
+- Coins (the ones the user needs to achieve the game)
+
 ## Backlog
 -score board
 

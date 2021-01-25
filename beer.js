@@ -19,7 +19,10 @@ let rockPositionX = [54,250,350,800]
 let rockPositionY = [-80,-250,-40,-500]
 let coinX = -5
 let coinY = 200
-
+let rockHeight = 70
+let rockWidth = 70
+let startBtn = document.querySelector('#start')
+    
 
 //KEYS
 document.addEventListener ('keydown', (event) =>{
@@ -51,7 +54,7 @@ coinImg.src = 'images/coin.png'
 function draw () {
     ctx.drawImage(backImg, 0 ,0)
     ctx.drawImage(manImg, manX, canvas.height-20 - manImg.height)
-    ctx.drawImage(coinImg, coinX, coinY)//coordenadas x,y
+    ctx.drawImage(coinImg, coinX, coinY,70,70)//coordenadas x,y
     ctx.font = "40px Verdana "
     ctx.fillText('Score: ' + score, 40, canvas.height - 150)
 
@@ -60,13 +63,14 @@ function draw () {
     movePlayer()
     dropCoins()
     rockCollision()
+    startGame()
 
 }
 
 function moveRocks (){
     //ROCK crear un array con las posiciones de las piedras
     for(i = 0; i < rockPositionX.length; i++) {
-        ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i])
+        ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i],rockWidth,rockHeight)
 
         if (rockPositionY[i] < canvas.height) {
             rockPositionY[i] += 10
@@ -77,7 +81,7 @@ function moveRocks (){
          }
      
         }
-    }
+}
 
 function movePlayer (){
     if (isRightArrow && manX < maxRight) {
@@ -89,7 +93,6 @@ function movePlayer (){
 }
 
 function dropCoins(){
-    ctx.drawImage(coinImg, coinX, coinY)
     if(coinY < canvas.height) {
         coinY+= 3
     } else {
@@ -98,18 +101,39 @@ function dropCoins(){
     }
 }
 
-/*function rockCollision(){
-    if() {
-
+function rockCollision(){
+    if(manX + manWidth <= rockWidth){
+        gameOver()
     }
-}*/01
+}
 
-//COINS
+function coinCollision() {
+    if(manX + manWidth <= coinWidth) {
+        score++
+    }
 
+}
 
-setInterval(()=> {
-    requestAnimationFrame(draw)
-},30)
+function gameOver(){
+    canvas.style.display = "none" // esconder el canvas cuando el juego termine
+    startBtn.style.display = 'block'
+    clearInterval(intervalID) //don'twe need this?
+    alert('GameOver')
 
+}
 
+function startGame(){
+    canvas.style.display = 'block'
+    startBtn.style.display = 'none'
+    intervalID = setInterval(()=> {
+        requestAnimationFrame(draw)
+    },30)
+}
 
+window.addEventListener('load', () => {
+    canvas.style.display = 'none'
+
+    startBtn.addEventListener('click', ()=>{
+        startGame()
+    })
+})
