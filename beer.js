@@ -1,4 +1,3 @@
-
 let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext('2d')
 canvas.style.border = '2px solid black'
@@ -9,7 +8,7 @@ let incrementManX = 10
 // MAN STATISTICS
 let manX = 150
 let manY = 200
-let manHeight = 25
+let manHeight = 25 
 let manWidth = 25
 
 let isLeftArrow = false;
@@ -21,7 +20,7 @@ let maxLeft = 0
 //let rockX = 100
 let rockPositionX = [54,250,350,800]
 let rockPositionY = [-80,-250,-40,-500]
-let rockHeight = 70
+let rockHeight = 70 
 let rockWidth = 70
 
 let coinX = -5
@@ -43,14 +42,13 @@ document.addEventListener ('keydown', (event) =>{
         isLeftArrow = true;
     }
 })
-
 document.addEventListener('keyup', ()=>{
     isRightArrow = false;
     isLeftArrow = false;
 })
 
 
-//CREATE IMAGES
+//IMAGES
 let backImg = document.createElement('img')
 backImg.src = 'images/city.png'
 
@@ -76,19 +74,15 @@ function draw () {
     moveRocks() 
     movePlayer()
     dropCoins()
-    rockCollision()
-    startGame()
-    
-    
-
+    coinCollision()
 }
 
 function moveRocks (){
     //ROCK crear un array con las posiciones de las piedras
     for(i = 0; i < rockPositionX.length; i++) {
         ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i],rockWidth,rockHeight)
-        console.log('Rock X =>', rockPositionX[i])
-        console.log('Rock Y =>', rockPositionY[i])
+        //console.log('Rock X =>', rockPositionX[i])
+        //console.log('Rock Y =>', rockPositionY[i])
 
         if (rockPositionY[i] < canvas.height) {
             rockPositionY[i] += 10
@@ -97,10 +91,23 @@ function moveRocks (){
              rockPositionY[i] = -5 
              rockPositionX[i] = Math.floor(Math.random() * 1000)
          }
-         
-         if(manX+ manImg.manHeight >= rockPositionX[i] + rockHeight){
+        console.log(rockPositionY[i] + rockImg.height > manY && 
+            manX > rockPositionX[i] && manX + manWidth < rockPositionX[i] + rockImg.width)
+        /* 
+        if(manX + manHeight >= rockPositionY[i] && 
+            manY <= rockPositionY[i] && (manY <= rockPositionY[i] ||
+             manY + manWidth >= rockPositionY[i] + constant)|| 
+             manX + manWidth >= canvas.width) {
             console.log('game ended')
-            alert('gameOver')
+            alert('Game Over!')
+         }
+         */
+         if (rockPositionY[i] + rockHeight > manY && 
+            manX > rockPositionX[i] && manX + manWidth < rockPositionX[i] + rockWidth) {
+                console.log(rockPositionY[i], manY )
+                console.log('game ended')
+                clearInterval(intervalID)
+                alert('Game Over')
          }
     }
 }
@@ -122,20 +129,13 @@ function dropCoins(){
        coinX = Math.floor(Math.random()*1000)
     }
 }
-/*
-function rockCollision(){
-    if(manX + manWidth <= rockY + rockHeight){
-       //gameOver()
-        console.log('game over')
-    }
-}
-/*
+
 function coinCollision() {
-    if(roca<) {
+    if(manX + manHeight <= rockPositionY && manY <= rockPositionY && (manY <= rockPositionY || manY + manWidth >= rockPositionY + constant)|| manX + manWidth >= canvas.width) {
         score++
     }
 
-}*/
+}
 
 function gameOver(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
@@ -144,8 +144,6 @@ function gameOver(){
     alert('GameOver')
 
 }
-
-
 
 function startGame(){
     
@@ -163,4 +161,4 @@ window.addEventListener('load', () => {
     startBtn.addEventListener('click', ()=>{
         startGame()
     })
-})
+});

@@ -6,15 +6,27 @@ Beer Challenge is a game where the player has to move to the left and the right 
 While the player is trying to get the coins, the obstacles will keep dropping so it will make the player a little more difficult to complete the task.
 
 ## MVP (DOM - CANVAS)
+
 The game has this elements:
+
 - The player 
 - Obstacles (in this case are rocks falling from outside the canvas)
 - Coins (the ones the user needs to achieve the game)
 
 ## Backlog
--score board
+- score board
 
 ## Data structure
+
+## beer.js
+- function draw ()
+- function moveRocks ()
+- function movePlayer ()
+- function dropCoins()
+- function gameOver()
+- function startGame ()
+
+
 
 ## States y States Transitions
 
