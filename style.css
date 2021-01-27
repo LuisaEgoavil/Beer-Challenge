@@ -1,8 +1,14 @@
 h1 {
-    text-align: center;
+    text-align: center;  
 }
 
 #myCanvas {
     display: block;
     margin: 0 auto;
+}
+
+.happybeer {
+     width: 100px;
+     height:100px;
+     float: center;
 }

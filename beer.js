@@ -97,22 +97,14 @@ function moveRocks (){
              rockPositionX[i] = Math.floor(Math.random() * 1000)
          }
          */
-        /* 
-        if(manX + manHeight >= rockPositionY[i] && 
-            manY <= rockPositionY[i] && (manY <= rockPositionY[i] ||
-             manY + manWidth >= rockPositionY[i] + constant)|| 
-             manX + manWidth >= canvas.width) {
-            console.log('game ended')
-            alert('Game Over!')
-         }
-         */
-         if (rockPositionY[i] + rockHeight > manY && 
+        if (rockPositionY[i] + rockHeight > manY && 
             manX > rockPositionX[i] && (manX + manWidth < rockPositionX[i] + rockWidth)) {
 
                 console.log(rockPositionY[i], manY )
                 console.log('game ended')
                 clearInterval(intervalID)
-                alert('Game Over')
+                gameOver()
+                
          }
     }
 }
@@ -136,7 +128,8 @@ function dropCoins(){
 }
 
 function coinCollision() {
-    if(manX + manHeight <= rockPositionY && manY <= rockPositionY && (manY <= rockPositionY || manY + manWidth >= rockPositionY + constant)|| manX + manWidth >= canvas.width) {
+    if(rockPositionY[i] + rockHeight > manY && 
+        manX > rockPositionX[i] && (manX + manWidth < rockPositionX[i] + rockWidth)) {
         score++
     }
 
@@ -144,9 +137,24 @@ function coinCollision() {
 
 function gameOver(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    startBtn.style.display = 'block'
-    clearInterval(intervalID) 
-    alert('GameOver')
+    //startBtn.style.display = 'block'
+    //clearInterval(intervalID) 
+    //alert('GameOver')
+    let body = document.querySelector('body')
+
+    gameOverScreen = document.createElement('div')
+    gameOverScreen.classList.add('gameOverScr')
+    gameOverScreen.innerHTML = `
+        <h1>GAME OVER</h1>
+        <h2>Sorry! Maybe next time!</h2>
+        <button class='reset-btn'>Try again?</button>
+    `
+    body.appendChild(gameOverScreen)
+    let reset = gameOverScreen.querySelector('.reset-btn')
+
+    reset.addEventListener('click', ()=>{
+     
+    })
 
 }
 
