@@ -17,7 +17,7 @@ let maxRight = 1150
 let maxLeft = 0
 //let rockY = -5
 //let rockX = 100
-let rockPositionX = [50,250,350,800]
+let rockPositionX = [50,250,700,1000]
 let rockPositionY = [-80,-250,-40,-500]
 let rockHeight = 30 
 let rockWidth = 60
@@ -25,7 +25,7 @@ let rockVelocity = 10
 //COINS
 let coinX = -5
 let coinY = 200
-let coinHeight = 70
+let coinHeight = 60
 let coinWidth = 70
 
 let startBtn = document.querySelector('#start')
@@ -64,8 +64,8 @@ function draw () {
     ctx.drawImage(backImg, 0 ,0)
     ctx.drawImage(manImg, manX, manY)
     ctx.drawImage(coinImg, coinX, coinY,80,64)//coordenadas x,y
-    ctx.font = "40px Verdana "
-    ctx.fillText('Score: ' + score, 40, canvas.height - 150)
+    ctx.font = "50px Verdana"
+    ctx.fillText('Score: ' + score, 10, canvas.height - 380)
 
     //CALLBACK FUNCTIONS
     moveRocks() 
@@ -144,10 +144,10 @@ function coinCollision() {
         coinY = -60
         coinX = Math.floor(Math.random()*1000)
 
-    ctx.fillText('Score: ' + score, 40, canvas.height - 150)   
+    //ctx.fillText('Score: ' + score, 40, canvas.height - 150)   
     } 
 
-    if (score === 8) {
+    if (score === 10) {
         winGame()
     } 
 
@@ -205,7 +205,7 @@ function winGame(){
     body.appendChild(winScreen)
     let reset = winScreen.querySelector('.play-again')
     reset.addEventListener('click', ()=>{
-    startGame()
+    restartGame()
     })
 }
 
