@@ -6,23 +6,22 @@ let score = 0
 let incrementManY = 10
 let incrementManX = 10
 // MAN STATISTICS
-let manX = 150
+let manX = 575
 let manY = 200
 let manHeight = 25 
 let manWidth = 25
-
+//KEYS
 let isLeftArrow = false;
 let isRightArrow = false;
 let maxRight = 1150
 let maxLeft = 0
-
 //let rockY = -5
 //let rockX = 100
-let rockPositionX = [54,250,350,800]
+let rockPositionX = [50,250,350,800]
 let rockPositionY = [-80,-250,-40,-500]
 let rockHeight = 70 
 let rockWidth = 70
-
+//COINS
 let coinX = -5
 let coinY = 200
 let coinHeight = 70
@@ -83,16 +82,21 @@ function moveRocks (){
         ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i],rockWidth,rockHeight)
         //console.log('Rock X =>', rockPositionX[i])
         //console.log('Rock Y =>', rockPositionY[i])
+        rockPositionY[i] += 10
 
+        if (rockPositionY[i] == 500) {
+            rockPositionX.push(Math.floor(Math.random() * 1000))
+            rockPositionY.push(-10)
+        }
+        /*
         if (rockPositionY[i] < canvas.height) {
             rockPositionY[i] += 10
            
          } else {
-             rockPositionY[i] = -5 
+             rockPositionY[i] = -15
              rockPositionX[i] = Math.floor(Math.random() * 1000)
          }
-        console.log(rockPositionY[i] + rockImg.height > manY && 
-            manX > rockPositionX[i] && manX + manWidth < rockPositionX[i] + rockImg.width)
+         */
         /* 
         if(manX + manHeight >= rockPositionY[i] && 
             manY <= rockPositionY[i] && (manY <= rockPositionY[i] ||
@@ -103,7 +107,8 @@ function moveRocks (){
          }
          */
          if (rockPositionY[i] + rockHeight > manY && 
-            manX > rockPositionX[i] && manX + manWidth < rockPositionX[i] + rockWidth) {
+            manX > rockPositionX[i] && (manX + manWidth < rockPositionX[i] + rockWidth)) {
+
                 console.log(rockPositionY[i], manY )
                 console.log('game ended')
                 clearInterval(intervalID)
