@@ -162,9 +162,14 @@ function startGame(){
     
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
+    let text = document.getElementById('#starttext')
+    text.style.display = 'none'
+
     intervalID = setInterval(()=> {
         requestAnimationFrame(draw)
     }, 30)
+
+
    
 }
 
