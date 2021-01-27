@@ -12,6 +12,7 @@ The game has this elements:
 - The player 
 - Obstacles (in this case are rocks falling from outside the canvas)
 - Coins (the ones the user needs to achieve the game)
+- Levels: after every coin the player achieves, will increment the speed
 
 ## Backlog
 - score board

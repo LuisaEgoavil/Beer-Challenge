@@ -47,7 +47,6 @@ document.addEventListener('keyup', ()=>{
     isLeftArrow = false;
 })
 
-
 //IMAGES
 let backImg = document.createElement('img')
 backImg.src = 'images/city.png'
@@ -60,8 +59,6 @@ rockImg.src = 'images/rock.png'
 
 let coinImg = document.createElement('img')
 coinImg.src = 'images/coin.png'
-
-
 
 function draw () {
     ctx.drawImage(backImg, 0 ,0)
@@ -141,8 +138,8 @@ function coinCollision() {
     if(coinX + coinWidth > manX && 
         coinX < manX + manWidth && 
         coinY + coinHeight > manY){
-        score++
-        rockVelocity++
+        score++ //SCORE WILL INCREMENT
+        rockVelocity++ //VELOCITY WILL INCREMENT
     
         coinY = -60
         coinX = Math.floor(Math.random()*1000)
@@ -150,7 +147,7 @@ function coinCollision() {
     ctx.fillText('Score: ' + score, 40, canvas.height - 150)   
     } 
 
-    if (score === 5) {
+    if (score === 8) {
         winGame()
     } 
 
@@ -158,7 +155,6 @@ function coinCollision() {
 
 function gameOver(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    //startBtn.style.display = 'block'
     clearInterval(intervalID) 
     let body = document.querySelector('body')
 
@@ -169,9 +165,9 @@ function gameOver(){
         <h2>Sorry! Maybe next time!</h2>
         <button class='reset-btn'>Try again?</button>
     `
+
     body.appendChild(gameOverScreen)
     let reset = gameOverScreen.querySelector('.reset-btn')
-
     reset.addEventListener('click', ()=>{
     restartGame()
     })
@@ -198,7 +194,6 @@ function restartGame() {
 
 function winGame(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    //startBtn.style.display = 'block'
     clearInterval(intervalID) 
     let body = document.querySelector('body')
     winScreen = document.createElement('div')
