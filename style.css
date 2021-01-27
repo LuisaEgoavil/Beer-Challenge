@@ -1,5 +1,7 @@
 h1 {
-    text-align: center;  
+    text-align: center;
+    font-size: 60px;
+    font-family: 'Sigmar One', cursive 
 }
 
 #myCanvas {
