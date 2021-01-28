@@ -3,9 +3,9 @@ let ctx = canvas.getContext('2d')
 canvas.style.border = '2px solid black'
 let intervalID = 0
 let score = 0
+//MAN STATISTICS
 let incrementManY = 10
 let incrementManX = 10
-// MAN STATISTICS
 let manX = 575
 let manY = 500
 let manHeight = 80 
@@ -15,8 +15,7 @@ let isLeftArrow = false;
 let isRightArrow = false;
 let maxRight = 1150
 let maxLeft = 0
-//let rockY = -5
-//let rockX = 100
+//ROCKS
 let rockPositionX = [50,250,700,1000]
 let rockPositionY = [-80,-250,-40,-500]
 let rockHeight = 30 
@@ -63,7 +62,7 @@ coinImg.src = 'images/coin.png'
 function draw () {
     ctx.drawImage(backImg, 0 ,0)
     ctx.drawImage(manImg, manX, manY)
-    ctx.drawImage(coinImg, coinX, coinY,80,64)//coordenadas x,y
+    ctx.drawImage(coinImg, coinX, coinY,80,64)//X,Y COORDINATES
     ctx.font = "50px Verdana"
     ctx.fillText('Score: ' + score, 10, canvas.height - 380)
 
@@ -75,18 +74,8 @@ function draw () {
 }
 
 function moveRocks (){
-    //ROCK crear un array con las posiciones de las piedras
+    //CREATE AN ARRAY OF ROCKS AND A FOR LOOP
     for(i = 0; i < rockPositionX.length; i++) {
-        //ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i],rockWidth,rockHeight)
-        //console.log('Rock X =>', rockPositionX[i])
-        //console.log('Rock Y =>', rockPositionY[i])
-        /*rockPositionY[i] += 10
-
-        if (rockPositionY[i] == 200) {
-            rockPositionX.push(Math.floor(Math.random() * 1000))
-            rockPositionY.push(-10)
-        }
-        console.log(rockPositionX)*/
       
         if (rockPositionY[i] < canvas.height) {
             rockPositionY[i] += rockVelocity
@@ -96,16 +85,7 @@ function moveRocks (){
              rockPositionX[i] = Math.floor(Math.random() * 1000)
          }
          ctx.drawImage(rockImg, rockPositionX[i] , rockPositionY[i],80,64)
-        /* 
-        if (rockPositionY[i] + rockHeight > manY && 
-            manX > rockPositionX[i] && (manX + manWidth < rockPositionX[i] + rockWidth)) {
-
-                console.log(rockPositionY[i], manY )
-                console.log('game ended')
-                clearInterval(intervalID)
-                gameOver()
-                
-         }*/
+         //COLLISION
          if (rockPositionX[i] + rockWidth > manX && 
             rockPositionX[i] < manX + manWidth && 
             rockPositionY[i] + rockHeight > manY) {
@@ -142,12 +122,10 @@ function coinCollision() {
         rockVelocity++ //VELOCITY WILL INCREMENT
     
         coinY = -60
-        coinX = Math.floor(Math.random()*1000)
-
-    //ctx.fillText('Score: ' + score, 40, canvas.height - 150)   
+        coinX = Math.floor(Math.random()*1000)  
     } 
-
-    if (score === 10) {
+    //GOAL IF THE PLAYER ACHIEVES 10 COINS
+    if (score === 1) {
         winGame()
     } 
 
@@ -155,7 +133,7 @@ function coinCollision() {
 
 function gameOver(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    clearInterval(intervalID) 
+    
     let body = document.querySelector('body')
 
     gameOverScreen = document.createElement('div')
@@ -169,7 +147,8 @@ function gameOver(){
     body.appendChild(gameOverScreen)
     let reset = gameOverScreen.querySelector('.reset-btn')
     reset.addEventListener('click', ()=>{
-    restartGame()
+        
+        restartGame()
     })
     
 }
@@ -182,19 +161,26 @@ function startGame(){
     text.style.display = 'none'
 
     intervalID = setInterval(()=> {
+        console.log('interval')
         requestAnimationFrame(draw)
     }, 30)
 }
 
 function restartGame() {
- gameOverScreen.style.display = 'none'
- startGame()
+    console.log('inside restartGame')
+    gameOverScreen.style.display = 'none'
+    //SET SOME VARIABLES TO ORIGINAL POSITION
+    intervalID = 0
+    score = 0
+    manX = 575
+    manY = 500
+    
+    startGame()
  
 }
 
 function winGame(){
     canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    clearInterval(intervalID) 
     let body = document.querySelector('body')
     winScreen = document.createElement('div')
     winScreen.classList.add('winScr')
