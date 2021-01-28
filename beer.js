@@ -28,7 +28,11 @@ let coinHeight = 60
 let coinWidth = 70
 
 let startBtn = document.querySelector('#start')
-    
+
+//MUSIC
+let coinSound = new Audio('./sounds/coinsound.mp3')
+let gameOverSound = new Audio('./sounds/gameoversound.mp3')
+let winSound = new Audio ('./sounds/winsound.mp3')
 
 //KEYS
 document.addEventListener ('keydown', (event) =>{
@@ -91,7 +95,7 @@ function moveRocks (){
             rockPositionY[i] + rockHeight > manY) {
             clearInterval(intervalID)
             gameOver()
-            console.log(rockPositionX[i], rockPositionY[i],manX, manY )
+            gameOverSound.play() //MUSIC
          }
     }
 }
@@ -120,13 +124,15 @@ function coinCollision() {
         coinY + coinHeight > manY){
         score++ //SCORE WILL INCREMENT
         rockVelocity++ //VELOCITY WILL INCREMENT
-    
+        coinSound.play() //MUSIC
         coinY = -60
         coinX = Math.floor(Math.random()*1000)  
     } 
     //GOAL IF THE PLAYER ACHIEVES 5 COINS
-    if (score === 5) {
+    if (score === 1) {
+        winSound.play()//MUSIC
         winGame()
+        
     } 
 
 }
@@ -192,12 +198,12 @@ function winGame(){
         <h1>You win!</h1>
         <button class='play-again'>Play again?</button>
     `
-    clearInterval(ID)
+    clearInterval(intervalID)
     body.appendChild(winScreen)
     let reset = winScreen.querySelector('.play-again')
     reset.addEventListener('click', ()=>{
     winScreen.style.display = 'none'
-
+    
         restartGame()
        
     })
