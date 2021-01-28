@@ -96,8 +96,9 @@ function moveRocks (){
             clearInterval(intervalID)
             gameOver()
             gameOverSound.play() //MUSIC
+            
          }
-    }
+    }                                                                                                                                                                                                                                                                                                                                                                                                           
 }
 
 function movePlayer (){
@@ -129,7 +130,7 @@ function coinCollision() {
         coinX = Math.floor(Math.random()*1000)  
     } 
     //GOAL IF THE PLAYER ACHIEVES 5 COINS
-    if (score === 1) {
+    if (score === 5) {
         winSound.play()//MUSIC
         winGame()
         
@@ -145,8 +146,9 @@ function gameOver(){
     gameOverScreen = document.createElement('div')
     gameOverScreen.classList.add('gameOverScr')
     gameOverScreen.innerHTML = `
-        <h1>GAME OVER</h1>
+        <h1>-GAME OVER-</h1>
         <h2>Sorry! Maybe next time!</h2>
+        <img src="images/nobeer.png"><br><br><br><br>
         <button class='reset-btn'>Try again?</button>
     `
 
@@ -183,6 +185,7 @@ function restartGame() {
     manY = 500
     rockPositionX = [50,250,700,1000]
     rockPositionY = [-80,-250,-40,-500]
+    rockVelocity = 10
     
     startGame()
  
@@ -195,15 +198,15 @@ function winGame(){
     winScreen = document.createElement('div')
     winScreen.classList.add('winScr')
     winScreen.innerHTML = `
-        <h1>You win!</h1>
+        <h1>-You win!-</h1>
+        <img src="images/winbeer.png"><br><br><br><br>
         <button class='play-again'>Play again?</button>
     `
     clearInterval(intervalID)
     body.appendChild(winScreen)
     let reset = winScreen.querySelector('.play-again')
     reset.addEventListener('click', ()=>{
-    winScreen.style.display = 'none'
-    
+        winScreen.style.display = 'none'
         restartGame()
        
     })
