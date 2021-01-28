@@ -65,7 +65,7 @@ function draw () {
     ctx.drawImage(coinImg, coinX, coinY,80,64)//X,Y COORDINATES
     ctx.font = "50px Verdana"
     ctx.fillText('Score: ' + score, 10, canvas.height - 380)
-
+   
     //CALLBACK FUNCTIONS
     moveRocks() 
     movePlayer()
@@ -124,16 +124,16 @@ function coinCollision() {
         coinY = -60
         coinX = Math.floor(Math.random()*1000)  
     } 
-    //GOAL IF THE PLAYER ACHIEVES 10 COINS
-    if (score === 1) {
+    //GOAL IF THE PLAYER ACHIEVES 5 COINS
+    if (score === 5) {
         winGame()
     } 
 
 }
 
 function gameOver(){
-    canvas.style.display = "none" // esconder el canvas cuando el juego termine
-    
+    canvas.style.display = "none" // HIDE CANVAS WHEN THE GAME IS FINISHED
+
     let body = document.querySelector('body')
 
     gameOverScreen = document.createElement('div')
@@ -147,23 +147,24 @@ function gameOver(){
     body.appendChild(gameOverScreen)
     let reset = gameOverScreen.querySelector('.reset-btn')
     reset.addEventListener('click', ()=>{
-        
+       
         restartGame()
     })
     
 }
 
 function startGame(){
-    
+    console.log(canvas)
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
     let text = document.getElementById('starttext')
     text.style.display = 'none'
 
     intervalID = setInterval(()=> {
-        console.log('interval')
         requestAnimationFrame(draw)
     }, 30)
+
+    
 }
 
 function restartGame() {
@@ -174,13 +175,16 @@ function restartGame() {
     score = 0
     manX = 575
     manY = 500
+    rockPositionX = [50,250,700,1000]
+    rockPositionY = [-80,-250,-40,-500]
     
     startGame()
  
 }
 
 function winGame(){
-    canvas.style.display = "none" // esconder el canvas cuando el juego termine
+
+    canvas.style.display = "none" // HIDE CANVAS WHEN THE GAME IS FINISHED
     let body = document.querySelector('body')
     winScreen = document.createElement('div')
     winScreen.classList.add('winScr')
@@ -188,10 +192,14 @@ function winGame(){
         <h1>You win!</h1>
         <button class='play-again'>Play again?</button>
     `
+    clearInterval(ID)
     body.appendChild(winScreen)
     let reset = winScreen.querySelector('.play-again')
     reset.addEventListener('click', ()=>{
-    restartGame()
+    winScreen.style.display = 'none'
+
+        restartGame()
+       
     })
 }
 

@@ -2,8 +2,8 @@
 
 ## Description
 
-Beer Challenge is a game where the player has to move to the left and the right avoiding getting hit by the obstacles. His mission? Collect 5 coins so he can enjoy a nice big beer! 
-While the player is trying to get the coins, the obstacles will keep dropping so it will make the player a little more difficult to complete the task.
+Beer Challenge is a game where the player moves right and left avoiding getting hit by the obstacles. Your mission? Collect 5 coins so he can enjoy a nice big beer! 
+Everytime you earn 1 coin, the speed from the falling rocks will increment, so be carefull!
 
 ## MVP 
 
@@ -11,32 +11,34 @@ The game has this elements:
 
 - The player 
 - Obstacles (in this case are rocks falling from outside the canvas)
-- Coins (the ones the user needs to achieve the game)
+- Coins (the ones the player needs to achieve the game)
 - Levels: after every coin the player achieves, will increment the speed
-
-## Backlog
-- score board
 
 ## Data structure
 
-## beer.js
+### beer.js
 
 - function draw ()
 - function moveRocks ()
 - function movePlayer ()
 - function dropCoins()
+- function coinCollision()
 - function gameOver()
 - function startGame ()
 - function restart ()
-- function gameOver ()
+- function winGame()
 
-## States y States Transitions
+## States Transitions
 
-## Task
+Contains:
+- splashScreen
+- gameScreen
+- winScreen
+- gameOverScreen
 
 ## Links
 
-## Git
+- Link to the game: https://luisaegoavil.github.io/Beer-Challenge/.
 
 ## Slides
 
