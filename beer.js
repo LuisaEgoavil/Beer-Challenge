@@ -164,7 +164,7 @@ function gameOver(){
 }
 
 function startGame(){
-    console.log('start game')
+   
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
     let text = document.getElementById('starttext')
