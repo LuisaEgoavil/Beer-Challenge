@@ -130,9 +130,10 @@ function coinCollision() {
         coinX = Math.floor(Math.random()*1000)  
     } 
     //GOAL IF THE PLAYER ACHIEVES 5 COINS
-    if (score === 5) {
+    if (score === 1) {
         winSound.play()//MUSIC
         winGame()
+       
         
     } 
 
@@ -157,12 +158,13 @@ function gameOver(){
     reset.addEventListener('click', ()=>{
        
         restartGame()
+        gameOverSound.load()
     })
     
 }
 
 function startGame(){
-    console.log(canvas)
+    console.log('start game')
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
     let text = document.getElementById('starttext')
@@ -176,8 +178,7 @@ function startGame(){
 }
 
 function restartGame() {
-    console.log('inside restartGame')
-    gameOverScreen.style.display = 'none'
+    
     //SET SOME VARIABLES TO ORIGINAL POSITION
     intervalID = 0
     score = 0
@@ -188,7 +189,7 @@ function restartGame() {
     rockVelocity = 10
     
     startGame()
- 
+ gameOverScreen.style.display = 'none' ////
 }
 
 function winGame(){
@@ -208,6 +209,7 @@ function winGame(){
     reset.addEventListener('click', ()=>{
         winScreen.style.display = 'none'
         restartGame()
+        winSound.load()
        
     })
 }
