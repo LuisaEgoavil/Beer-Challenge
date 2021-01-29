@@ -130,7 +130,7 @@ function coinCollision() {
         coinX = Math.floor(Math.random()*1000)  
     } 
     //GOAL IF THE PLAYER ACHIEVES 5 COINS
-    if (score === 1) {
+    if (score === 5) {
         winSound.play()//MUSIC
         winGame()
        
